@@ -19,7 +19,7 @@ This generates a testfile.native in the root directory
 # Example
 ```
 ./build.sh tests/unit/unit1.ml 
-../unit1.native tests/unit/unit1.spec 
+./unit1.native tests/unit/unit1.spec 
 
 ```
 
