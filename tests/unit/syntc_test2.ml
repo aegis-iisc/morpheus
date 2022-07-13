@@ -298,8 +298,8 @@ let () =
       
         (*call  the typecheker/synthesis *)
         try        
-            let annotated = Gamma.find gamma "do_test" in    
-            R.verifyRParser gamma sigma delta do_test  annotated
+            let annotated = Gamma.find gamma "testBind" in    
+            R.verifyRParser gamma sigma delta testBind  annotated
         with 
             | e -> 
                 raise (e);
