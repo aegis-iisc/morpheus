@@ -35,4 +35,4 @@ chunk : (te : tagentry) ->
                        
                 plssel (h', stream) = str' 
 				/\ plssel (h, stream) = str 
-				/\ plen (str') = plen (str) -- sz}; *)
+				/\ plen (str') = plen (str) -- sz}; 

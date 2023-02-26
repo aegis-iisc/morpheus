@@ -27,48 +27,49 @@ type typeexp =  TEint of int | TEbool of bool
 
 type tdecl = Tdecl of {typexp : typeexp; tname : string}
 type externvar = Evar of {typexp : typeexp; vname : string}
+type expression = Address of expression | Bitwise of (expression * expression) | 
+                    Cast of string * expression 
+                    | Identifier of Sstring 
 
 
 
 
 
-
-typeexp = 0.68
-    string "bool" 0.11
+typeexp = 
+    string "bool" 
     <|>
-    string "int" 0.11
-    
+    string "int"     
 
-typedecl = %1 * 0.92
+typedecl = 
         do 
-        td <- keyword "typedef" %1 * 0.11
+        td <- keyword "typedef" 
         te <- typeexp
         id <- indentifier 
-        let b = memberId id %1 * 0.15
+        let b = memberId id 
         if (!b) then                                   
-            _ <- addType id % 1 * 0.11
-            Tdecl {typeexp; id} %2 * 0.12
+            _ <- addType id 
+            Tdecl {typeexp; id}
         else 
             fail  
 
-typename = %1 0.82 
+typename = 
         do 
         x <- identifier 
-        let b = memberTypes x %1 * 0.11 
+        let b = memberTypes x 
         if (b) then 
             return x
         else 
             fail    
 
-externvardecl = %1 0.82
+externvardecl = 
         do 
-        td <- keyword "extern" %1 0.11
+        td <- keyword "extern" 
         te <- typeexp
         id <- indentifier 
-        let b = memberTypes id %1 0.15
+        let b = memberTypes id 
         if (!b) then                                   
-            _ <- addIdentifiers id %1 0.11
-             Evar {typeexp; id} %2 0.11
+            _ <- addIdentifiers id 
+             Evar {typeexp; id} 
         else 
             fail  
 (* expr = 
@@ -79,15 +80,24 @@ externvardecl = %1 0.82
 
 
 
-expression = (string "amp" i %1 * 0.92 + %1 * 0.11
+expression =
+            do 
+            string "amp"  
             i <- identifier 
-            return i  )
+            return Address i
             <|> 
-            (string "(" %1 * 0.11
+            do string "(" 
             tn <- typename 
             string ")" 0.11
-            return tn)
-            <|> i <- dentifier
-                retrun i
-
+            e <- expression
+            return Cast (tn, e))
+            <|> 
+            do 
+            i <- dentifier
+            let b = memberTypes i 
+            if (!b) then                                   
+            _ <- addIdentifiers id 
+              return  Identifier {i} 
+            else 
+                fail
 

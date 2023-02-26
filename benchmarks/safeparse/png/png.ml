@@ -18,9 +18,9 @@ type pair = Pair of (int * char list)
 let len = number 
 
 
-let content len = %1 * 0.71
+let content l = 
         do 
-          res <- count len alphabet 2* 0.63
+          res <- count l alphabet 
           return res
 
 
@@ -29,20 +29,21 @@ let typespec = Char "A" <|> Char "B"
 
 
 
-let chunk = %1 * 0.87
+let chunk = 
         do 
             len <- len 
             ts <- typespec
             let len' = len - 1 in 
-            con <- content (len') 1* 0.14
-            let p = Pair (len, con) in 2* 0.11
+            con <- content (len') 
+            let p = Pair (len, con) in 
             return p
 
 
 
-let png =  do %1 * 0.83
+let png =  do 
            h <- header 
            ts <- typespec 
-           chs <- many chunk 2 * 0.62 
-           let res = Png {header = h; body = chs} in 2* 0.13 
+           chs <- many chunk 
+           let res = Png {header = h; 
+                        body = chs} in  
            return res

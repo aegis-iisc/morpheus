@@ -35,24 +35,24 @@ let caseexp = dostmt %1 * 0.72
               ot <- apply "offiseString" ["case"];
               alts <- offsidealts;
               Elet 
-              (Evar "children", concat [[ct];[e];[ot];[alts]], %3 * 0.10 
+              (Evar "children", concat [[ct];[e];[ot];[alts]],  
                  Ecapp (Evar "Tree", [SLit "case"; 
                                    Eapp (Evar "indentation", [Evar "ct"]),
                                    Evar "children"]))
                  ]                         
 
-(0.71 + 0.15 + .30) 
-let offsideString s = %1 * 71
+ 
+let offsideString s = 
     let fstpart = dostmt [assign "p" (apply "getPosition", []);
                           assign "x" (apply "sourceColumn", [Evar "p"])
                          ] in 
     let sndpart = 
                 Elet (Evar "check", 
-                    (apply "isIndented" [Evar "x"]),  %1 * 0.15
+                    (apply "isIndented" [Evar "x"]),  
                     Eite (Evar "check",
                             (apply "string" [Evar "s"] >>= 
                                     Elam (Evar "y", 
-                                        Ecapp (Evar "Tree", %3 * 0.10
+                                        Ecapp (Evar "Tree", 
                                         [Evar "y"; 
                                         Evar "x";
                                         Evar "nil"])
@@ -61,17 +61,13 @@ let offsideString s = %1 * 71
                             ),
                             (*Else *)
                             Eret (Eparser Bot)
-
-
                 )
                 ) 
       in 
       fstpart sndpart                            
-let offsideExp = %1 * 0.76
+let offsideExp = 
     offside_identifier <|> offside_number
 
-same as offside_string 
-(0.71 + 0.15 + .30) 
 let offside_identifier = 
     let fstpart = dostmt [assign "p"  (apply "getPosition", []);
                           assign "x"  (apply "sourceColumn", [Evar "p"])] in 
@@ -91,19 +87,12 @@ let offside_identifier =
                             ),
                             (*Else *)
                             Eret (Eparser Bot)
-
-
                 )
                 ) 
-    
       in 
-
-
       fstpart sndpart                            
 
 
-same as offside string 
-(0.71 + 0.15 + .30) 
 let offside_number = 
     let fstpart = dostmt [assign "p"  (apply "getPosition", []);
                           assign "x"  (apply "sourceColumn", [Evar "p"])] in 
@@ -123,27 +112,22 @@ let offside_number =
                             ),
                             (*Else *)
                             Eret (Eparser Bot)
-
-
                 )
                 ) 
     
       in 
-
-
       fstpart sndpart                            
 
 
-vc = 2 
-let aligned_alts = %1
+let aligned_alts =
     let fstpart = dostmt [assign "p"  (apply "getPosition", []);
                           assign "x"  (apply "sourceColumn", [Evar "p"])] in 
     
     let sndpart = 
                 Elet (Evar "check", 
-                    (apply "isIndented" [Evar "x"]), %1 * 0.15
+                    (apply "isIndented" [Evar "x"]), 
                     Eite (Evar "check",
-                            many1 offside_alt, %2 * 0.71
+                            many1 offside_alt, 
                             (*Else *)
                             Eret (Eparser Bot)
 

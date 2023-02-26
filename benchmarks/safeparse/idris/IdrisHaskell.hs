@@ -1,3 +1,6 @@
+module IdrisParser where 
+
+-- import Parsec   
 data IState = IState {
      ist :: Int
      
@@ -16,7 +19,7 @@ getIst :: IdrisParser IState
 getIst = get 
 
 putIst :: IdrisParser ()
-pustIst i = put {ist = i }
+putIst i = put {ist = i}
 
 doBlock :: IdrisParser PTerm
 doBlock = do  
@@ -60,5 +63,19 @@ indentedDoBlock  = do
                             return res 
                      else 
                         fail "Indentation error"
-                    
-indent = P.unPos . P.sourceColumn $ P.getSourcePos
+
+indent :: IdrisParser Int                     
+indent =    do    
+                  inp <- getInput
+                  next <- lookAheadMatches (reservedOp)  
+                  if (next) then 
+                       do 
+                         lexeme 
+                         return (P.unPos . P.sourceColumn $ P.getSourcePos)
+                  else 
+                         return (P.unPos . P.sourceColumn $ P.getSourcePos)
+
+lookAheadMatches :: IdrisParser a -> IdrisParser Bool 
+lookAheadMatches p = do match <- lookAhead (optional p)
+                        return $ isJust match
+ 

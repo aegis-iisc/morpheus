@@ -28,44 +28,44 @@ let header = number >>= (Elam [Evar "w"],
 
 let vnumber = digit 
 
-let header = do %1 * 0.71
+let header = do       
       w <- number 
       h <- number 
       m <- number 
-      let res = Triple (w, h, m) in  3* 0.13
+      let res = Triple (w, h, m) in  
       return res
 
 (* *)
-let rgb n = %1 * 0.83
+let rgb n = 
       do 
         r <- number_lt n 
         g <- number_lt n 
         b <- number_lt n
-        let res =  RGB (r, g, b) in 3* 0.13 
+        let res =  RGB (r, g, b) in 
        return res
 
 
-let columns tr = %1 * 0.72
-       let m = pi 3 (tr) in %1 * 0.11
-       let w = pi 1  (t3) in %1 * 0.13
-       let res = count w (rgb m) in  %2 * 0.56
+let columns tr = 
+       let m = pi 3 (tr) in 
+       let w = pi 1  (tr) in 
+       let res = count w (rgb m) in  
        return res
       
 
 
-let body tr = %1 0.92
+let body tr = 
       do 
-      rows <- count h (columns tr) 2% 0.67
+      rows <- count h (columns tr) 
       retrun rows
 
 
-let ppm = %1 * 0.87
+let ppm = 
          do 
-         string "P" %1 * 0.11
+         string "P" 
          vn <- versionnumber
          triple <- header 
-         b <- body triple % 1* 0.15
-         let res = Pair (triple, b) in %2 * 0.11
+         b <- body triple 
+         let res = Pair (triple, b) in 
          return res 
 
 

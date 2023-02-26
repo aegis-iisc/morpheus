@@ -25,31 +25,33 @@ let sellerinfo =
       sn <- sellername      
       sr <- sellerrating
       _ <- string "</sellerinfo>"
-      let res = Seller {name = sn; rating = sr} in 
+      let res = Seller {name = sn; 
+                        rating = sr} in 
       return res
 
 
-let bidderinfo s = %1 
+let bidderinfo s =  
       do 
-      _ <- string "<bidderinfo>" 1* 0.12
-      bn <- biddername
+      _ <- string "<bidderinfo>" 
+       bn <- biddername
       br <- bidderrating 
-      _ <- string "</bidderinfo>" %1 * 0.15
+      _ <- string "</bidderinfo>" 
       if (bn = s) then 
             fail 
       else 
-           return Bidder {name = bn; rating = br} 2* 0.13
+           return Bidder {name = bn; rating = br} 
 
 
-let auctioninfo s = many (bidderinfo s) 2 * 0.79 + 1 * 0.15
+let auctioninfo s = many (bidderinfo s) 
 
-let listing  = %1 * 0.92
+let listing  = 
       do 
-      _ <- string "<listing>" %1 * 0.12
+      _ <- string "<listing>" 
       si <- sellerinfo 
-      ais <- autioninfo si %1 * 0.82
-      _ <- string "</listing>" %1 * 0.11
-      let res = Listing {seller = si; bidders= ais}  in 2* 0.15
+      ais <- autioninfo si 
+      _ <- string "</listing>" 
+      let res = Listing {seller = si; 
+                         bidders= ais}  in 
       return res
 
 

@@ -121,15 +121,16 @@ externvardecl : State {\(h : heap).
 
 	 	 	    	(ldisjoint (Id', Ty') = true)
 	 	 	     				};
-typedecl : State {\(h : heap).
+typedecl : Exc {\(h : heap).
 				\(Id : [string]), (Ty : [string]).
                    (idsel (h, ids) = Id /\
                     tysel (h, types) = Ty /\  
                     ldisjoint (Id, Ty) = true)
                 }
-                v : {v : tdecl | true}		
+                v : {v : tdecl result | true}		
 	 	 	    {   \(h : heap), (v : typeexpr), (h' : heap).
                     \(Id : [string]), (Ty : [string]), (Id' : [string]), (Ty' : [string]).
+                    v = Inl (v1) => 
                     (idsel (h', ids) = Id' /\
                     idsel (h, ids) = Id /\
                     tysel (h, types) = Ty /\
@@ -137,7 +138,10 @@ typedecl : State {\(h : heap).
                  
 
 	 	 	    	(ldisjoint (Id', Ty') = true)
-	 	 	     				};
+                    /\
+                    v = Inr (Err) => (included(inp,h,h') = true   
+
+	 	 	    };
 
 expression : State {\(h : heap).
 				\(Id : [string]), (Ty : [string]).
@@ -145,7 +149,7 @@ expression : State {\(h : heap).
                     tysel (h, types) = Ty /\  
                     ldisjoint (Id, Ty) = true)
                 }
-                v : {v : tdecl | true}		
+                v : {v : expression | true}		
 	 	 	    {   \(h : heap), (v : typeexpr), (h' : heap).
                     \(Id : [string]), (Ty : [string]), (Id' : [string]), (Ty' : [string]).
                     (idsel (h', ids) = Id' /\
@@ -155,4 +159,17 @@ expression : State {\(h : heap).
      	 	    	(ldisjoint (Id', Ty') = true)
 				};
 
-             
+typename : Stexc {\(h : heap).
+				\(Id : [string]), (Ty : [string]).
+                   (idsel (h, ids) = Id /\
+                    tysel (h, types) = Ty /\  
+                    ldisjoint (Id, Ty) = true)
+                }             
+                v : {v : string | true}		
+	 	 	    {   \(h : heap), (v : typeexpr), (h' : heap).
+                    \(Id' : [string]), (Ty' : [string]).
+                    (idsel (h', ids) = Id' /\
+                    tysel (h, types) = Ty' =>
+                    (ldisjoint (Id', Ty') = true /\
+                    mem (Ty', v) = true)
+				};
