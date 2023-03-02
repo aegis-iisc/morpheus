@@ -16,7 +16,7 @@ This generates a testfile.native in the <project-root>/outputs directory
 
 # To run:
 ```
-.outputs/testfile.native <path-to-testfile>/testfile.spec 
+./outputs/testfile.native <path-to-testfile>/testfile.spec 
 ```
 # Example
 ```
