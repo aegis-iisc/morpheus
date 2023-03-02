@@ -9,27 +9,30 @@ A Refinement Typed Parser Combinator DSL.
 
 # To build:
 ```
-./build.sh path-to-testfile.ml
+cd <project-root>
+./build.sh <path-to-testfile>/testfile.native
 ```
-This generates a testfile.native in the root directory
+This generates a testfile.native in the <project-root>/outputs directory
 
 # To run:
-./testfile.native path-to-testfile.spec 
-
+```
+.outputs/testfile.native <path-to-testfile>/testfile.spec 
+```
 # Example
 ```
-./build.sh tests/unit/unit1.ml 
+./build.sh tests/unit/unit1.native 
 ./unit1.native tests/unit/unit1.spec 
 
 ```
 
-# Structure
-- Type/Specification Language : ./speclang/specLang.ml
-- Program/Term Language       : ./synlang/lambdasyn.ml 
-- Typing Rules 	              : ./typechecking/syntypechecker.ml
-- Tests 		              : ./tests/unit/
-- Verification Conditions     : ./typechecking/verificationC.ml
-- VCtoZ3 Encoding 	      : ./vcencode/vcencode.ml
+# Directory Structure
+- Type/Specification Language : <project-root>/speclang/specLang.ml
+- Program/Term Language       : <project-root>/synlang/lambdasyn.ml 
+- Typing Rules 	              : <project-root>/typechecking/syntypechecker.ml
+- Unit and other tests 		  : <project-root>/tests/unit/
+- Morpheus benchmarks         : <project-root>/benchmarks/safeparse/<benchmakr> 
+- Verification Conditions     : <project-root>/typechecking/verificationC.ml
+- VCtoZ3 Encoding 	          : <project-root>/vcencode/vcencode.ml
 
 
 
