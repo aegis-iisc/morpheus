@@ -1,8 +1,8 @@
-# Morpheus
+## Morpheus
 A Refinement Typed Parser Combinator DSL.
 
 
-# Dependencies:
+## Dependencies:
 1. OCaml (Version >= 4.03)
 2. Z3 
 3. OCamlLex 
