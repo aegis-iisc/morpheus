@@ -7,25 +7,25 @@ A Refinement Typed Parser Combinator DSL.
 2. Z3 
 3. OCamlLex 
 
-# To build:
+## To build:
 ```
 cd <project-root>
 ./build.sh <path-to-testfile>/testfile.native
 ```
 This generates a testfile.native in the <project-root>/outputs directory
 
-# To run:
+## To run:
 ```
 ./outputs/testfile.native <path-to-testfile>/testfile.spec 
 ```
-# Example
+## Example
 ```
 ./build.sh tests/unit/unit1.native 
-./unit1.native tests/unit/unit1.spec 
+./outputs/unit1.native tests/unit/unit1.spec 
 
 ```
 
-# Directory Structure
+## Directory Structure
 - Type/Specification Language : <project-root>/speclang/specLang.ml
 - Program/Term Language       : <project-root>/synlang/lambdasyn.ml 
 - Typing Rules 	              : <project-root>/typechecking/syntypechecker.ml
